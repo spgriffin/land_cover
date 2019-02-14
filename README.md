@@ -2,6 +2,10 @@
 
 An overview of applying deep learning models to provide high resolution land cover in the state of Alabama using Keras and ArcGIS
 
+I also published this work on Medium below.
+
+https://medium.com/geoai/high-resolution-land-cover-mapping-using-deep-learning-7126fee571dd
+
 Outline:
 
 1. Land Cover Mapping 
@@ -55,6 +59,7 @@ For training run, I need to have labelled data for each land cover class like ot
 Training Sample Manager                                 |  Land Cover Samples
 :------------------------------------------------------:|:-------------------------:
 ![](images/Training_Samples_Manager_Modify_Legend.jpg)  |  ![](images/Labels.jpg)
+
 Figure 4. Training Samples Manager and Sampled Labels
 
 The input and output of Image Segmentation model should be in raster format for the training run. Since labelled data are in feature class or vector format, I used Feature to Raster function in ArcGIS Pro [Ref 6] to convert labelled data in feature class format to raster format.
@@ -75,6 +80,8 @@ Deep learning models require lots of data for training. From the training data, 
 
 I used three common methods of data augmentation to increase number of training data for rare land cover classes (buildings, roads or parking lots, and water): 1) shifting: Export Training Data For Deep Learning in ArcGIS Pro [Ref 8] has stride option (distance to move when creating the next image chip) along X and Y direction. The exported chip were 256 along X and Y direction. I set stride 64 along X and Y direction to get more chips. This happened during Data Processing step and I did not do it again here, 2) rotation: in each run of data augmentation, each chip randomly selects among four values [-180, -90, 90, 180] to create new chip, and 3) zoom: in each run of data augmentation, each chip randomly selects a zoom factor across given range [0.05, 0.45] to create new chip (Figure 6; Python #3). I then merged new generated data with existing often land cover classes (harvested or bare land, forest ,and planted or dark cropland). Finally, I normalized each band of NAIP image and shuffled training samples.
 
+Data Augmentation     | Data Augmentation
+:--------------------:|:---------------------:
 ![](images/DA_1.png)  |  ![](images/DA_2.png)
 ![](images/DA_3.png)  |  ![](images/DA_4.png)
 
@@ -140,8 +147,6 @@ In this article, I walked you through the U-Net model I used to create classifie
 
 ### 11. Acknowledgement and References
 I want to say thanks to Daniel Wilson and Mary Wahl (Microsoft) who answered my questions during the project.
-You can find my blog on Medium below.
-https://medium.com/geoai/high-resolution-land-cover-mapping-using-deep-learning-7126fee571dd
 
 Ref 1) https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery
 
