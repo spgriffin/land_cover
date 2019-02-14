@@ -2,7 +2,7 @@
 
 An overview of applying deep learning models to provide high resolution land cover in the state of Alabama using Keras and ArcGIS
 
-I also published this work on Medium below.
+I also published this work on Medium.
 
 https://medium.com/geoai/high-resolution-land-cover-mapping-using-deep-learning-7126fee571dd
 
